@@ -1,0 +1,46 @@
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "network-shuffle",
+    srcs = glob(["src/main/**/*.java"]),
+    deps = [
+        "@maven//:com_fasterxml_jackson_core_jackson_annotations",
+        "@maven//:com_fasterxml_jackson_core_jackson_databind",
+        "@maven//:io_netty_netty_all",
+        "@maven//:org_apache_commons_commons_lang3",
+        "@maven//:org_fusesource_leveldbjni_leveldbjni_all",
+        "//common/network-common",
+        "@maven//:com_google_guava_guava",
+        "@maven//:io_dropwizard_metrics_metrics_core",
+        "@maven//:org_slf4j_slf4j_api",
+        #"@maven//:org_spark_project_spark_unused"
+    ],
+)
+
+scala_library(
+    name = "tests_dependencies",
+    testonly = 1,
+    runtime_deps = [
+        "//common/network-shuffle/src/test/resources",
+        "@maven//:com_google_guava_guava",
+        "@maven//:log4j_log4j",
+        "@maven//:org_scala_lang_scala_library",
+        "@maven//:org_slf4j_slf4j_api",
+        #"@maven//:org_spark_project_spark_unused"
+    ],
+    deps = [
+        "main_dependencies",
+        "//common/network-common:main_dependencies",
+        "//common/tags:main_dependencies",
+        "@maven//:com_novocode_junit_interface",
+        "@maven//:junit_junit",
+        "@maven//:log4j_log4j",
+        "@maven//:org_mockito_mockito_core",
+        "@maven//:org_scalatest_scalatest_2_12",
+    ],
+)
+
+filegroup(
+    name = "coordinates",
+    srcs = ["MANIFEST.MF"],
+)

@@ -1,0 +1,33 @@
+package(default_visibility = ["//visibility:public"])
+
+scala_library(
+    name = "tags",
+    srcs = glob(["src/main/**/*.scala", "src/main/**/*.java"]),
+    deps = [
+        "@io_bazel_rules_scala_scala_library//:io_bazel_rules_scala_scala_library",
+        #"@maven//org_spark_project_spark_unused"
+    ],
+)
+     
+
+
+scala_library(
+    name = "tests_dependencies",
+    testonly = 1,
+    deps = [
+        "@com_novocode_junit_interface",
+        "@junit_junit",
+        "@org_scalatest_scalatest_2_12",
+        "main_dependencies"
+    ],
+    runtime_deps = [
+        "@io_bazel_rules_scala_scala_library//:io_bazel_rules_scala_scala_library",
+        #"@maven//org_spark_project_spark_unused"
+    ],
+)
+     
+
+filegroup(
+    name = "coordinates",
+    srcs = ["MANIFEST.MF"],
+)

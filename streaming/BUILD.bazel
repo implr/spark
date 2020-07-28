@@ -1,0 +1,83 @@
+package(default_visibility = ["//visibility:public"])
+
+scala_library(
+    name = "streaming",
+        srcs = glob([
+            "src/main/scala/**/*.scala",
+            "src/main/java/**/*.java",
+        ]),
+    deps = [
+        "//common/tags",
+        "//common/network-common",
+        "//core",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_esotericsoftware_kryo_shaded",
+        "@maven//:io_dropwizard_metrics_metrics_core",
+        "@maven//:net_sf_py4j_py4j",
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_log4j12",
+        "@maven//:org_apache_hadoop_hadoop_client",
+        "@maven//:org_apache_hadoop_hadoop_common",
+        "@maven//:org_apache_hadoop_hadoop_mapreduce_client_core",
+        "@maven//:org_apache_commons_commons_text",
+        "@maven//:org_eclipse_jetty_jetty_http",
+        "@maven//:org_eclipse_jetty_jetty_plus",
+        "@maven//:org_eclipse_jetty_jetty_server",
+        "@maven//:org_eclipse_jetty_jetty_servlet",
+        "@maven//:org_eclipse_jetty_jetty_servlets",
+        "@maven//:org_eclipse_jetty_jetty_util",
+        "@io_bazel_rules_scala_scala_library//:io_bazel_rules_scala_scala_library",
+        "@io_bazel_rules_scala_scala_xml//:io_bazel_rules_scala_scala_xml",
+        "@maven//:javax_ws_rs_javax_ws_rs_api",
+        "@maven//:javax_servlet_javax_servlet_api",
+    ],
+)
+     
+
+
+scala_library(
+    name = "tests_dependencies",
+    testonly = 1,
+    deps = [
+        "//common/tags:main_dependencies",
+        "//core:main_dependencies",
+        "@com_novocode_junit_interface",
+        "@junit_junit",
+        "@org_mockito_mockito_core",
+        "@org_scalacheck_scalacheck_2_12",
+        "@org_scalatest_scalatest_2_12",
+        "@org_seleniumhq_selenium_htmlunit_driver",
+        "@org_seleniumhq_selenium_selenium_java",
+        "main_dependencies"
+    ],
+    runtime_deps = [
+        "//streaming/src/test/resources:resources",
+        "@com_google_guava_guava//:linkable",
+        "@com_google_protobuf_protobuf_java//:linkable",
+        "@commons_codec_commons_codec//:linkable",
+        "@log4j_log4j//:linkable",
+        "@org_apache_avro_avro_mapred_hadoop2//:linkable",
+        "@org_apache_commons_commons_math3//:linkable",
+        "@org_apache_curator_curator_recipes//:linkable",
+        "@org_apache_hadoop_hadoop_client//:linkable",
+        "@org_apache_zookeeper_zookeeper//:linkable",
+        "@org_eclipse_jetty_jetty_http//:linkable",
+        "@org_eclipse_jetty_jetty_plus//:linkable",
+        "@org_eclipse_jetty_jetty_server//:linkable",
+        "@org_eclipse_jetty_jetty_servlet//:linkable",
+        "@org_eclipse_jetty_jetty_servlets//:linkable",
+        "@org_eclipse_jetty_jetty_util//:linkable",
+        "@org_lz4_lz4_java//:linkable",
+        "@org_scala_lang_scala_library//:linkable",
+        "@org_slf4j_slf4j_api//:linkable",
+        "@org_slf4j_slf4j_log4j12//:linkable",
+        "@org_spark_project_spark_unused//:linkable",
+        "@org_xerial_snappy_snappy_java//:linkable"
+    ],
+)
+     
+
+filegroup(
+    name = "coordinates",
+    srcs = ["MANIFEST.MF"],
+)

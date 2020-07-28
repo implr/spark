@@ -1,0 +1,53 @@
+package(default_visibility = ["//visibility:public"])
+
+java_binary(
+    name = "spark_class",
+    main_class = "org.apache.spark.launcher.Main",
+    runtime_deps = [
+        ":launcher",
+    ],
+)
+
+java_library(
+    name = "launcher",
+    srcs = glob(["src/main/**/*.java"]),
+    deps = [
+        "//common/tags",
+    ],
+)
+
+
+scala_library(
+    name = "tests_dependencies",
+    testonly = 1,
+    deps = [
+        "//common/tags:main_dependencies",
+        "@maven//:com_novocode_junit_interface",
+        "@maven//:junit_junit",
+        "@maven//:log4j_log4j",
+        "@maven//:org_apache_hadoop_hadoop_client",
+        "@maven//:org_mockito_mockito_core",
+        "@maven//:org_scalatest_scalatest_2_12",
+        "@maven//:org_slf4j_jul_to_slf4j",
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_log4j12",
+        "main_dependencies"
+    ],
+    runtime_deps = [
+        "//launcher/src/test/resources:resources",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_protobuf_protobuf_java",
+        "@maven//:log4j_log4j",
+        "@maven//:org_apache_hadoop_hadoop_client",
+        "@maven//:org_scala_lang_scala_library",
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_log4j12",
+        "@maven//:org_spark_project_spark_unused"
+    ],
+)
+     
+
+filegroup(
+    name = "coordinates",
+    srcs = ["MANIFEST.MF"],
+)

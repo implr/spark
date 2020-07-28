@@ -1,0 +1,49 @@
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "kvstore",
+    srcs = glob(["src/main/**/*.java"]),
+    deps = [
+        "//common/tags",
+        "@maven//:com_fasterxml_jackson_core_jackson_annotations",
+        "@maven//:com_fasterxml_jackson_core_jackson_core",
+        "@maven//:com_fasterxml_jackson_core_jackson_databind",
+        "@maven//:com_google_guava_guava",
+        "@maven//:org_fusesource_leveldbjni_leveldbjni_all",
+        #"@maven//:org_spark_project_spark_unused"
+    ],
+)
+     
+
+
+scala_library(
+    name = "tests_dependencies",
+    testonly = 1,
+    deps = [
+        "//common/tags:main_dependencies",
+        "@maven//:com_novocode_junit_interface",
+        "@maven//:commons_io_commons_io",
+        "@maven//:io_dropwizard_metrics_metrics_core",
+        "@maven//:junit_junit",
+        "@maven//:log4j_log4j",
+        "@maven//:org_scalatest_scalatest_2_12",
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_log4j12",
+        "main_dependencies"
+    ],
+    runtime_deps = [
+        "//common/kvstore/src/test/resources:resources",
+        "@maven//:com_google_guava_guava",
+        "@maven//:log4j_log4j",
+        "@io_bazel_rules_scala_scala_library//:io_bazel_rules_scala_scala_library",
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_log4j12",
+        "@maven//:org_spark_project_spark_unused"
+    ],
+)
+     
+
+filegroup(
+    name = "coordinates",
+    srcs = ["MANIFEST.MF"],
+)

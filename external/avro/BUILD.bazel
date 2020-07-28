@@ -1,0 +1,54 @@
+package(default_visibility = ["//visibility:public"])
+
+scala_library(
+    name = "main_dependencies",
+    deps = [
+        "//common/tags:main_dependencies",
+        "//sql/core:main_dependencies",
+        "@org_spark_project_spark_unused//:linkable"
+    ],
+    runtime_deps = [
+        "//external/avro/src/main/resources:resources"
+    ],
+)
+     
+
+
+scala_library(
+    name = "tests_dependencies",
+    testonly = 1,
+    deps = [
+        "//core:main_dependencies",
+        "//sql/catalyst:main_dependencies",
+        "//sql/core:main_dependencies",
+        "@com_novocode_junit_interface",
+        "@junit_junit",
+        "@org_scalacheck_scalacheck_2_12",
+        "@org_scalatest_scalatest_2_12",
+        "main_dependencies"
+    ],
+    runtime_deps = [
+        "//external/avro/src/test/resources:resources",
+        "@com_google_guava_guava//:linkable",
+        "@com_google_protobuf_protobuf_java//:linkable",
+        "@commons_codec_commons_codec//:linkable",
+        "@commons_lang_commons_lang//:linkable",
+        "@log4j_log4j//:linkable",
+        "@org_apache_avro_avro_mapred_hadoop2//:linkable",
+        "@org_apache_commons_commons_math3//:linkable",
+        "@org_apache_curator_curator_recipes//:linkable",
+        "@org_apache_hadoop_hadoop_client//:linkable",
+        "@org_apache_zookeeper_zookeeper//:linkable",
+        "@org_scala_lang_scala_library//:linkable",
+        "@org_slf4j_slf4j_api//:linkable",
+        "@org_slf4j_slf4j_log4j12//:linkable",
+        "@org_spark_project_spark_unused//:linkable",
+        "@org_xerial_snappy_snappy_java//:linkable"
+    ],
+)
+     
+
+filegroup(
+    name = "coordinates",
+    srcs = ["MANIFEST.MF"],
+)

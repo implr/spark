@@ -1,0 +1,21 @@
+package(default_visibility = ["//visibility:public"])
+
+scala_library(
+    name = "main_dependencies",
+    exports = [
+        "//core:main_dependencies",
+        "//graphx:main_dependencies",
+        "//mllib:main_dependencies",
+        "//repl:main_dependencies",
+        "//sql/core:main_dependencies",
+        "//streaming:main_dependencies",
+        "@com_google_guava_guava//:linkable",
+        "@org_spark_project_spark_unused"
+    ],
+)
+     
+
+filegroup(
+    name = "coordinates",
+    srcs = ["MANIFEST.MF"],
+)
