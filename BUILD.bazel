@@ -1,0 +1,21 @@
+package(default_visibility = ["//visibility:public"])
+
+sh_binary(
+    name = "spark-submit",
+    srcs = ["bazel_wrappers/submit.sh"],
+    data = [
+        ":_submit_wrapper",
+    ],
+)
+
+java_binary(
+    name = "_submit_wrapper",
+    main_class = "org.apache.spark.deploy.SparkSubmit",
+    runtime_deps = [
+        "//core:submit",
+        "//repl",
+        "//resource-managers/kubernetes/core"
+        # TODO
+    ],
+    jvm_flags = ["-Dscala.usejavacp=true"],
+)

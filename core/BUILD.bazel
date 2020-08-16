@@ -4,9 +4,6 @@ scala_binary(
     name = "submit",
     deps = [":core"],
     main_class = "org.apache.spark.deploy.SparkSubmit",
-    runtime_deps = [
-        "//repl",   # hack to allow running shell from submit
-    ]
 )
 
 scala_library(
